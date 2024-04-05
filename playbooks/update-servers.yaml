@@ -1,6 +1,6 @@
 - hosts: all
 
-  become: yes
+  become: true
   tasks:
     # # Upgrade packages
     # - name: upgrade apt packages
@@ -18,11 +18,6 @@
 
     - name: Use curl to fetch a webpage
       ansible.builtin.shell: 
-        cmd: 'curl \
-              -u {{ lookup("env", "PASSWORD") }} \
-              -d "Hello" \
-              -H "Title: RClone Backup of Immich to s3 completed" \
-              -H "Tags: floppy_disk" \
-              {{ lookup("env", "SERVER") }}'
+        cmd: "curl -u {{ lookup('env', 'PASSWORD') }} -d 'Hello' -H 'Title: RClone Backup of Immich to s3 completed' -H 'Tags: floppy_disk' {{ lookup('env', 'SERVER') }}"
       register: result
 

@@ -1,6 +1,6 @@
 - hosts: all
 
-  become: true
+  # become: true
   tasks:
     # # Upgrade packages
     # - name: upgrade apt packages
@@ -16,7 +16,7 @@
     #     path: /var/run/reboot-required
     #   register: reboot_required
 
-    - name: Use curl to fetch a webpage
+    - name: curl ntfy
       ansible.builtin.shell: 
         cmd: "curl -u {{ lookup('env', 'PASSWORD') }} -d 'Hello' -H 'Title: RClone Backup of Immich to s3 completed' -H 'Tags: floppy_disk' {{ lookup('env', 'SERVER') }}"
       register: result

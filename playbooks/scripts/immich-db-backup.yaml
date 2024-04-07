@@ -1,8 +1,8 @@
 - name: Run backup script
-  hosts: localhost
+  hosts: 10.0.0.93
   tasks:
     - name: Run backup script
-      become: yes
+      #become: yes
       shell: |
         current_date=$(date +\%Y-\%m-\%d-\%H-\%M)
         backup_name="/mnt/immich-photos/db-backup/dump.sql-"$current_date".gz"

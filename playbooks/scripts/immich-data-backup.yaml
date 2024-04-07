@@ -1,5 +1,5 @@
 - name: Run backup script
-  hosts: 10.0.0.93
+  hosts: {{ HOST }}
   tasks:
     - name: Run backup script
       shell: |

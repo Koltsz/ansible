@@ -16,7 +16,7 @@
             curl \
             -u {{ PASSWORD }} \
             -d "Backup complete" \
-            -H "Title: Backup of $backup_name to {{ inventory_hostname }} to NAS and cloud" \
+            -H "Title: Backup of $backup_name to NAS and cloud" \
             -H "Tags: floppy_disk" \
             {{ SERVER }}
         fi

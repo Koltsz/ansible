@@ -7,7 +7,6 @@
 
         rclone copy /mnt/immich-photos/upload/ hetzner_crypt:main/immich --log-file /mnt/immich-photos/log-files/logs.txt --stats-log-level NOTICE
 
-        #backup_log="$(< /mnt/immich-photos/log-files/logs.txt)"
         backup_log=$(cat /mnt/immich-photos/log-files/logs.txt)
 
         curl \

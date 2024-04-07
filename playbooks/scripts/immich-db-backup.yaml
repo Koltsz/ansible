@@ -1,0 +1,23 @@
+- name: Run backup script
+  hosts: localhost
+  tasks:
+    - name: Run backup script
+      become: yes
+      shell: |
+        current_date=$(date +\%Y-\%m-\%d-\%H-\%M)
+        backup_name="/mnt/immich-photos/db-backup/dump.sql-"$current_date".gz"
+        backup_location="/mnt/synology-nfs"
+
+        docker exec -t immich_postgres pg_dumpall -c -U postgres | gzip > $backup_name
+        find /mnt/immich-photos/db-backup/ -type f -name '*.gz' -mtime +7 | xargs rm -f
+
+        rclone sync /mnt/immich-photos/db-backup/ hetzner_crypt:main/immich-db
+        if [ -f $backup_name ]
+        then
+            curl \
+            -u {{ PASSWORD }} \
+            -d "Backup complete" \
+            -H "Title: Backup of $backup_name to {{ inventory_hostname }} to synology" \
+            -H "Tags: floppy_disk" \
+            {{ SERVER }}
+        fi

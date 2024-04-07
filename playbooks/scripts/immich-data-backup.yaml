@@ -1,5 +1,5 @@
 - name: Run backup script
-  hosts: {{ HOST }}
+  hosts: "{{ HOST }}"
   tasks:
     - name: Run backup script
       shell: |

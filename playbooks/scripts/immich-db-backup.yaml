@@ -2,7 +2,6 @@
   hosts: 10.0.0.93
   tasks:
     - name: Run backup script
-      #become: yes
       shell: |
         current_date=$(date +\%Y-\%m-\%d-\%H-\%M)
         backup_name="/mnt/immich-photos/db-backup/dump.sql-"$current_date".gz"
@@ -17,7 +16,7 @@
             curl \
             -u {{ PASSWORD }} \
             -d "Backup complete" \
-            -H "Title: Backup of $backup_name to {{ inventory_hostname }} to synology" \
+            -H "Title: Backup of $backup_name to {{ inventory_hostname }} to NAS and cloud" \
             -H "Tags: floppy_disk" \
             {{ SERVER }}
         fi

@@ -1,0 +1,17 @@
+- name: Run backup script
+  hosts: "{{ HOST }}"
+  tasks:
+    - name: Run backup script
+      shell: |
+        rm -f /mnt/immich-photos/log-files/logs.txt
+
+        rclone sync /mnt/immich-photos/upload/ hetzner_crypt:main/immich --log-file /mnt/immich-photos/log-files/logs.txt --stats-log-level NOTICE
+
+        backup_log=$(cat /mnt/immich-photos/log-files/logs.txt)
+
+        curl \
+        -u {{ PASSWORD }} \
+        -d "$backup_log" \
+        -H "Title: Proxmox backups sync completed" \
+        -H "Tags: floppy_disk" \
+        {{ SERVER }}

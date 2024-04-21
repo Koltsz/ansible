@@ -3,11 +3,11 @@
   tasks:
     - name: Run backup script
       shell: |
-        rm -f /mnt/immich-photos/log-files/logs.txt
+        rm -f /root/rclone-logs/logs.txt
 
-        rclone sync /mnt/immich-photos/upload/ hetzner_crypt:main/immich --log-file /mnt/immich-photos/log-files/logs.txt --stats-log-level NOTICE
+        rclone sync /mnt/pve/aincrad-nas/dump/ hetzner_crypt:main/proxmox --log-file /root/rclone-logs/logs.txt --stats-log-level NOTICE
 
-        backup_log=$(cat /mnt/immich-photos/log-files/logs.txt)
+        backup_log=$(cat /root/rclone-logs/logs.txt)
 
         curl \
         -u {{ PASSWORD }} \

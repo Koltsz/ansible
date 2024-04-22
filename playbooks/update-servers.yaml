@@ -18,6 +18,6 @@
 
     - name: curl ntfy
       ansible.builtin.shell: 
-        cmd: "curl -u {{ PASSWORD }} -d '' -H 'Title: Reboot required on {{ inventory_hostname }}' -H 'Tags: floppy_disk' {{ SERVER }}"
+        cmd: "curl -u {{ PASSWORD }} -d '' -H 'Title: Reboot required on {{ inventory_hostname }}' -H 'Tags: raccoon' {{ SERVER }}"
       when: reboot_required.stat.exists
 

@@ -3,11 +3,12 @@
   tasks:
     - name: Run backup script
       shell: |
-        rclone copy ~/docker-compose hetzner_crypt:main/docker-server/docker-compose
+        rclone copy ~/docker-compose/dockge hetzner_crypt:main/docker-server/dockge
+        rclone copy ~/docker-compose/vaultwarden hetzner_crypt:main/docker-server/vaultwarden
 
         curl \
         -u {{ PASSWORD }} \
         -d "$backup_log" \
-        -H "Title: Docker Compose files backed up" \
+        -H "Title: Docker Compose folders backed up" \
         -H "Tags: floppy_disk" \
         {{ SERVER }}

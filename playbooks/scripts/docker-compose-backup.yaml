@@ -1,0 +1,13 @@
+- name: Run backup script
+  hosts: "{{ HOST }}"
+  tasks:
+    - name: Run backup script
+      shell: |
+        rclone copy ~/docker-compose hetzner_crypt:main/docker-server/dopcker-compose
+
+        curl \
+        -u {{ PASSWORD }} \
+        -d "$backup_log" \
+        -H "Title: Docker Compose files backed up" \
+        -H "Tags: floppy_disk" \
+        {{ SERVER }}

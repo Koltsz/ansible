@@ -5,7 +5,7 @@
       shell: |
         rm -f /root/rclone-logs/logs.txt
 
-        rclone sync /mnt/pve/aincrad-nas/dump/ hetzner_crypt:main/proxmox --log-file /root/rclone-logs/logs.txt --stats-log-level NOTICE
+        rclone sync /mnt/pve/truenas-backups/dump/ hetzner_crypt:main/proxmox --log-file /root/rclone-logs/logs.txt --stats-log-level NOTICE
 
         backup_log=$(cat /root/rclone-logs/logs.txt)
 

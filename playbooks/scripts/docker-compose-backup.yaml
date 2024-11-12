@@ -5,6 +5,7 @@
       shell: |
         rclone copy ~/docker-compose/dockge hetzner_crypt:main/docker-server/dockge
         rclone copy ~/docker-compose/vaultwarden hetzner_crypt:main/docker-server/vaultwarden
+        rclone copy ~/docker-compose/paperless-ngx hetzner_crypt:main/docker-server/paperless-ngx
 
         curl \
         -u {{ PASSWORD }} \

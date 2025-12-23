@@ -7,7 +7,7 @@
         rclone copy ~/docker-compose/vaultwarden hetzner_crypt:main/docker-server/vaultwarden
         rclone copy ~/docker-compose/paperless-ngx hetzner_crypt:main/docker-server/paperless-ngx
         rclone copy ~/docker-compose/gitea hetzner_crypt:main/docker-server/gitea
-        rclone cop ~/docker-compose/nginx-proxy-manager hetzner_crypt:main/docker-server/nginx-proxy-manager
+        rclone copy ~/docker-compose/nginx-proxy-manager hetzner_crypt:main/docker-server/nginx-proxy-manager
 
         curl \
         -u {{ PASSWORD }} \

@@ -8,6 +8,12 @@
         rclone copy ~/docker-compose/paperless-ngx hetzner_crypt:main/docker-server/paperless-ngx
         rclone copy ~/docker-compose/gitea hetzner_crypt:main/docker-server/gitea
         rclone copy ~/docker-compose/nginx-proxy-manager hetzner_crypt:main/docker-server/nginx-proxy-manager
+        rclone copy ~/docker-compose/termix hetzner_crypt:main/docker-server/termix
+        rclone copy ~/docker-compose/pocket-id hetzner_crypt:main/docker-server/pocket-id
+        rclone copy ~/docker-compose/ansible-semaphore hetzner_crypt:main/docker-server/ansible-semaphore
+        rclone copy ~/docker-compose/dockge hetzner_crypt:main/docker-server/dockge
+        rclone copy ~/docker-compose/rustfs hetzner_crypt:main/docker-server/rustfs
+        rclone copy ~/docker-compose/homepage hetzner_crypt:main/docker-server/homepage
 
         curl \
         -u {{ PASSWORD }} \

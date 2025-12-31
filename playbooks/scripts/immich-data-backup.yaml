@@ -30,8 +30,7 @@
 
         # First backup
         rclone copy \
-          /mnt/immich-photos/immich-server/ \
-          hetzner_crypt:main/immich \
+          /mnt/immich-photos/immich-server/hetzner_crypt:main/immich \
           --log-file "$LOG1" \
           --stats-log-level NOTICE
 

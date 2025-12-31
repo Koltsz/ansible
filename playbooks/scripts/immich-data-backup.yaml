@@ -23,22 +23,20 @@
 
         # Log file paths
         LOG1="/mnt/immich-photos/log-files/immich_hetzner_crypt_backup.log"
-        LOG2="/mnt/immich-photos/log-files/other_igris_backup.log"
+        LOG2="/mnt/immich-photos/log-files/immich_igris_backup.log"
 
         # Clean old logs
         rm -f "$LOG1" "$LOG2"
 
-        # First backup
-        rclone copy \
-          /mnt/immich-photos/immich-server/hetzner_crypt:main/immich \
+        # First backup to Hetzner Crypt
+        rclone copy /mnt/immich-photos/immich-server/ hetzner_crypt:main/immich \
           --log-file "$LOG1" \
           --stats-log-level NOTICE
 
         send_log "$LOG1" "RClone of Immich backup to Hetzner Crypt completed"
 
-        # Second backup
-        rclone copy \
-          /mnt/immich-photos/other-data/igris:/home/pi/backups/immich \
+        # Second backup to Igris
+        rclone copy /mnt/immich-photos/immich-server/ igris:/home/pi/backups/immich \
           --log-file "$LOG2" \
           --stats-log-level NOTICE
 

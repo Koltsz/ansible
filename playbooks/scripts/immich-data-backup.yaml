@@ -3,15 +3,44 @@
   tasks:
     - name: Run backup script
       shell: |
-        rm -f /mnt/immich-photos/log-files/logs.txt
+        set -e
 
-        rclone copy /mnt/immich-photos/immich-server/ hetzner_crypt:main/immich --log-file /mnt/immich-photos/log-files/logs.txt --stats-log-level NOTICE
+        send_log() {
+          local logfile="$1"
+          local title="$2"
 
-        backup_log=$(cat /mnt/immich-photos/log-files/logs.txt)
+          if [ -f "$logfile" ]; then
+            curl \
+              -u {{ PASSWORD }} \
+              -d @"$logfile" \
+              -H "Title: $title" \
+              -H "Tags: floppy_disk" \
+              {{ SERVER }}
+          else
+            echo "Log file $logfile not found"
+          fi
+        }
 
-        curl \
-        -u {{ PASSWORD }} \
-        -d "$backup_log" \
-        -H "Title: RClone backup of Immich completed" \
-        -H "Tags: floppy_disk" \
-        {{ SERVER }}
+        # Log file paths
+        LOG1="/mnt/immich-photos/log-files/immich_hetzner_crypt_backup.log"
+        LOG2="/mnt/immich-photos/log-files/other_igris_backup.log"
+
+        # Clean old logs
+        rm -f "$LOG1" "$LOG2"
+
+        # First backup
+        rclone copy \
+          /mnt/immich-photos/immich-server/ \
+          hetzner_crypt:main/immich \
+          --log-file "$LOG1" \
+          --stats-log-level NOTICE
+
+        send_log "$LOG1" "RClone of Immich backup to Hetzner Crypt completed"
+
+        # Second backup
+        rclone copy \
+          /mnt/immich-photos/other-data/igris:/home/pi/backups/immich \
+          --log-file "$LOG2" \
+          --stats-log-level NOTICE
+
+        send_log "$LOG2" "RClone of Immich backup to Igris completed"
